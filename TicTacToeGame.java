@@ -10,6 +10,15 @@ public class TicTacToeGame {
 		game.setBoard();
 		game.displayBoard();
 		game.setPlayerMarks();
+		int player = 0;
+		do {
+			game.makeMove(player);
+			game.displayBoard();
+			player ^= 1;
+		    
+			
+		}while (!game.isGameOver());
+		
 
 	}
 
