@@ -36,10 +36,14 @@ public class TicTacToe {
 	public void displayBoard() {
 		for (int i = 0; i < ROWS; i++) {
 			for (int j = 0; j < COLS; j++) {
-				System.out.print(grid[i][j]);
+				if (j == 0) {
+					System.out.print("| ");
+				}
+				System.out.print(grid[i][j] + " | ");
 			}
 			System.out.println();
 		}
+		System.out.println();
 	}
 	
 	
