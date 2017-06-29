@@ -42,6 +42,7 @@ public class TicTacToe {
 		}
 	}
 	
+	
 	/* ----------------------- setPlayerMarks() --------------------- */
 	public void setPlayerMarks() {
 		int i = 0;
@@ -52,6 +53,14 @@ public class TicTacToe {
 			player_marks[i] = mark.charAt(0);
 			i++;
 		}
+	}
+	
+	/* ------------------------ getPlayerName() ----------------------- */
+	public String getPlayerName(int idx) {
+		if (idx == 0 || idx == 1) {
+			return player_names[idx];
+		}
+		return null;
 	}
 	
 	/* ---------------------------- isGameWon() ---------------------- */
@@ -100,10 +109,13 @@ public class TicTacToe {
 	
 	/* ------------------------ isGameOver() ------------------------ */
 	public boolean isGameOver() {
+		
+		// first check if it's won
 		if (this.isGameWon()) {
 			return true;
 		}
 		
+		// check for the presence of empty slots, ie '-'
 		for (int i = 0; i < ROWS; i++) {
 			for (int j = 0; j < COLS; j++) {
 				if (grid[i][j] == '-') {
@@ -111,6 +123,8 @@ public class TicTacToe {
 				}
 			}
 		}
+		
+		// at this point, we can assume the game is over...
 		return true;
 	}
 	
@@ -123,15 +137,21 @@ public class TicTacToe {
 		    tile = in.nextInt();
 		} while (!isValidMove(tile));
 		
-		grid[tile / ROWS + 1][tile % COLS + 1] = player_marks[player_idx];
-		
+		int row_idx = (tile - 1) / ROWS;
+		int col_idx = (tile - 1) % COLS;
+		grid[row_idx][col_idx] = player_marks[player_idx];
 		
 	}
 	
 	/* ------------------------------- isValidMove() ----------------------------- */
 	private boolean isValidMove(int n) {
-		if (n >= 0 && n <= 8 && grid[n / ROWS][n % COLS] == '-') {
-			return true;
+		
+		int row_idx = (n - 1) / ROWS;
+		int col_idx = (n - 1) % COLS;
+		if (row_idx >= 0 && row_idx <= 2 && col_idx >= 0 && col_idx <= 2){
+			if (grid[row_idx][col_idx] == '-') {
+				return true;
+			}
 		}
 		System.out.println("Invalid move!");
 		return false;
